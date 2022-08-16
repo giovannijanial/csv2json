@@ -21,8 +21,21 @@ router.post(
 			const fileLine = readLine.createInterface({
 				input: readableFile,
 			}); //cria interface dividindo o arquivo linha por linha
+
+			let lines: string[] = [];
+
 			for await (let line of fileLine) {
-				console.log(line);
+				lines.push(line);
+			}
+
+			const [...fields] = lines[0].split(",");
+			lines.shift();
+
+			const content = lines.map((line) => line.split(","));
+
+			for (let i = 0; i < content.length; i++) {
+				console.log(fields[0], content[i][0]);
+				console.log(fields[1], content[i][1]);
 			}
 		}
 
