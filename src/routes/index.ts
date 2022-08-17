@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { fileRoutes } from "./postFile.route";
+import { fileRoutes } from "./file.route";
 
 const routes = Router();
 routes.use("/file", fileRoutes);
