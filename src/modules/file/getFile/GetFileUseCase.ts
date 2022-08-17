@@ -1,14 +1,23 @@
 import fs from "fs";
-import AdmZip from "adm-zip";
+import jszip from "jszip";
 
 class GetFileUseCase {
 	async execute() {
-		const zip = new AdmZip();
-		zip.addLocalFolder("./json/userid");
+		const zip = jszip();
+		const directoryContents = fs.readdirSync("./json/userid", {
+			withFileTypes: true,
+		});
 
-		content = await fs.readFile("./file4.txt");
-		zip.addFile("file4.txt", content);
-		zip.writeZip(filepath);
+		directoryContents.forEach(({ name }) => {
+			const path = `./json/userid/${name}`;
+			if (fs.statSync(path).isFile()) {
+				zip.file(path, fs.readFileSync(path, "utf-8"));
+			}
+		});
+
+		const zipAsBase64 = await zip.generateAsync({ type: "base64" });
+
+		return zipAsBase64;
 	}
 }
 
