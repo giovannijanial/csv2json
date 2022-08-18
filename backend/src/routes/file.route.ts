@@ -1,15 +1,12 @@
 import { Router } from "express";
 import multer from "multer";
-import { GetFileController } from "../modules/file/getFile/GetFileController";
-import { PostFileController } from "../modules/file/postFile/PostFileController";
+import { HandleFileController } from "../modules/file/handleFile/HandleFileController";
 
 const multerConfig = multer();
 const fileRoutes = Router();
 
-const postFileController = new PostFileController();
-const getFileController = new GetFileController();
+const postFileController = new HandleFileController();
 
-fileRoutes.post("/", multerConfig.array("file"), postFileController.hanlde);
-fileRoutes.get("/download", getFileController.hanlde);
+fileRoutes.post("/", multerConfig.array("file"), postFileController.handle);
 
 export { fileRoutes };

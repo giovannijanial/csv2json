@@ -13,9 +13,8 @@ export const useFile = () => {
   const transformFiles = useCallback(async (files: FormData) => {
     setLoading(true);
     try {
-      const res = await FileService.uploadFiles(files)
+      const { data } = await FileService.uploadFiles(files)
 
-      const { data } = await FileService.getFiles();
       const blob = b64ToBlob(data, "application/zip");
       fileSaver.saveAs(blob, `example.zip`);
 
