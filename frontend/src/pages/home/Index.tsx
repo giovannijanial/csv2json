@@ -15,15 +15,13 @@ const HomePage = () => {
 
   const onFileUpload = () => {
     const formData = new FormData();
-
     formData.append("actioon", "ADD");
     if (files) {
       for (let file of files) {
         formData.append("file", file as Blob)
       }
+      transformFiles(formData);
     }
-    transformFiles(formData);
-
   }
 
   return (
@@ -39,7 +37,7 @@ const HomePage = () => {
       <button
         className="btn-primary"
         onClick={onFileUpload}
-        disabled={loading}>
+        disabled={loading || !!!files}>
         {loading ? "Wait..." : "Transform Files"}
       </button>
     </div>

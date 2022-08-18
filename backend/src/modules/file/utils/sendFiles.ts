@@ -1,4 +1,3 @@
-import fs from "fs";
 import jszip from "jszip";
 
 class SendFiles {
@@ -6,7 +5,6 @@ class SendFiles {
 		const zip = jszip();
 
 		data.forEach((file, index) => {
-			console.log(file);
 			zip.file(`transform${Date.now()}${index}.json`, file);
 		});
 
