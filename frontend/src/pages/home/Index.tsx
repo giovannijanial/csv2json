@@ -28,15 +28,20 @@ const HomePage = () => {
 
   return (
     <div className="main">
-      <h2>CSV to JSON</h2>
-      <input type="file" onChange={onFileChange} multiple />
+      <h2 className="title">CSV to JSON</h2>
+      <input
+        className="files"
+        type="file"
+        accept=".csv, text/plain"
+        multiple
+        onChange={onFileChange}
+      />
       <button
         className="btn-primary"
         onClick={onFileUpload}
         disabled={loading}>
         {loading ? "Wait..." : "Transform Files"}
       </button>
-
     </div>
   )
 }
