@@ -10,10 +10,12 @@ export const useFile = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const getFile = useCallback(async () => {
+  const transformFiles = useCallback(async (files: FormData) => {
     setLoading(true);
     try {
-      const { data } = await FileService.getAll();
+      const res = await FileService.uploadFiles(files)
+
+      const { data } = await FileService.getFiles();
       const blob = b64ToBlob(data, "application/zip");
       fileSaver.saveAs(blob, `example.zip`);
 
@@ -28,7 +30,7 @@ export const useFile = () => {
   return {
     error,
     loading,
-    getFile,
+    transformFiles,
     image,
     success,
   }

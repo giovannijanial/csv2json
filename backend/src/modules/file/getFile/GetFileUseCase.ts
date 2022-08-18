@@ -2,18 +2,23 @@ import fs from "fs";
 import jszip from "jszip";
 
 class GetFileUseCase {
-	async execute() {
-		const zip = jszip();
-		const directoryContents = fs.readdirSync("./json/userid", {
+	private addFilesFromDirectoryToZip(directoryPath = "", zip: jszip) {
+		const directoryContents = fs.readdirSync(directoryPath, {
 			withFileTypes: true,
 		});
 
 		directoryContents.forEach(({ name }) => {
-			const path = `./json/userid/${name}`;
+			const path = `${directoryPath}/${name}`;
 			if (fs.statSync(path).isFile()) {
-				zip.file(path, fs.readFileSync(path, "utf-8"));
+				zip.file(name, fs.readFileSync(path, "utf-8"));
 			}
 		});
+	}
+
+	async execute() {
+		const zip = jszip();
+
+		this.addFilesFromDirectoryToZip("./data/userid", zip);
 
 		const zipAsBase64 = await zip.generateAsync({ type: "base64" });
 
