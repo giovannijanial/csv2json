@@ -21,10 +21,15 @@
  $ yarn install
  $ yarn dev
 ```
-
-## :globe_with_meridians: Test project
 - backend starts in [localhost:3000](http://localhost:3000/).
 - frontend starts in [localhost:5173](http://localhost:5173/).
+
+## :black_joker: Test with jest
+
+```bash
+# unit tests
+$ yarn test
+```
 
 ## :fleur_de_lis: Follow me!
 - Instagram: https://www.instagram.com/giovannijanial/
