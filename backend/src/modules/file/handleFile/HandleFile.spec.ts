@@ -1,5 +1,6 @@
 import { HandleFileUseCase } from "./HandleFileUseCase";
 import { Readable } from "stream";
+import { Buffer } from "buffer";
 
 describe("HandleFile", () => {
 	it("Should be able to handle file", async () => {
@@ -7,18 +8,19 @@ describe("HandleFile", () => {
 
 		const files: Express.Multer.File[] = [];
 		const readableFile = new Readable();
-		const buffer = new Buffer(232);
+		const buffer = Buffer.alloc(10);
+
 		files.push({
-			fieldname: "test",
-			originalname: "test",
-			encoding: "test",
-			size: 10,
+			fieldname: "file",
+			originalname: "test.csv",
+			encoding: "7bit",
+			size: 108,
 			stream: readableFile,
 			destination: "test",
 			filename: "test",
 			path: "test",
 			buffer: buffer,
-			mimetype: "test",
+			mimetype: "text/csv",
 		});
 
 		const result = await postFileTestUseCase.execute(files);

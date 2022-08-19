@@ -41,7 +41,7 @@ class TransformCsv2Json {
 		const content = lines.map((line) => line.split(","));
 		const arrObject = this.arrayToObject(header, content);
 
-		return JSON.stringify(arrObject);
+		return JSON.stringify(arrObject, null, 4);
 	}
 }
 

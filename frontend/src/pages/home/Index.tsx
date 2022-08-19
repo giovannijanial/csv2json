@@ -5,7 +5,7 @@ import './style.css'
 
 const HomePage = () => {
   const [files, setFiles] = useState<FileList>();
-  const { transformFiles, error, loading, success } = useFile();
+  const { transformFiles, loading } = useFile();
 
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
